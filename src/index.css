@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+:root {
+  --color-violet: #6C22A6;
+  --color-lime: #96E9C6;
+  --color-dark: #252525;
+  --color-surface: #2B2B2B;
+  --color-surface-deep: #1E1E1E;
+  --color-light: #F5F5F5;
+  --gradient-brand: linear-gradient(45deg, #6C22A6, #96E9C6);
+  --gradient-brand-subtle: linear-gradient(45deg, rgba(108, 34, 166, 0.15), rgba(150, 233, 198, 0.15));
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--color-dark);
+  color: var(--color-light);
+  font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow-x: hidden;
+  letter-spacing: 0.01em;
+}
+
+.font-mono-metrics {
+  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* High-contrast accessible gradient text on #252525 dark canvas */
+.text-gradient-brand {
+  background: linear-gradient(45deg, #C084FC, #96E9C6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Stroke-free elevated obsidian glass surfaces */
+.surface-glass {
+  background: linear-gradient(165deg, rgba(48, 48, 48, 0.72) 0%, rgba(33, 33, 33, 0.88) 100%);
+  backdrop-filter: blur(16px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.07),
+    0 20px 44px -22px rgba(0, 0, 0, 0.7);
+}
+
+.surface-glass-featured {
+  background: linear-gradient(160deg, rgba(58, 37, 84, 0.55) 0%, rgba(35, 35, 35, 0.92) 55%, rgba(30, 48, 44, 0.45) 100%);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    inset 0 1px 0 0 rgba(150, 233, 198, 0.22),
+    0 28px 64px -20px rgba(108, 34, 166, 0.48),
+    0 12px 32px -16px rgba(150, 233, 198, 0.16);
+}
+
+/* Primary CTA pulsing glow (violet -> lime, 2s cycle) */
+@keyframes ctaGlowPulse {
+  0%, 100% {
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+      0 0 0 0 rgba(108, 34, 166, 0.55),
+      0 12px 30px -8px rgba(108, 34, 166, 0.65);
+  }
+  50% {
+    box-shadow:
+      inset 0 1px 0 0 rgba(150, 233, 198, 0.45),
+      0 0 28px 2px rgba(150, 233, 198, 0.38),
+      0 14px 36px -6px rgba(108, 34, 166, 0.72);
+  }
+}
+
+.btn-cta-glow {
+  background: linear-gradient(45deg, #6C22A6 0%, #521A82 65%, #3C5D68 100%);
+  background-size: 160% 160%;
+  animation: ctaGlowPulse 2s ease-in-out infinite;
+  transition: transform 180ms var(--ease-settle), background-position 320ms var(--ease-settle);
+}
+
+.btn-cta-glow:hover {
+  background-position: 100% 0%;
+  transform: translateY(-2px);
+}
+
+.btn-cta-glow:active {
+  transform: translateY(0) scale(0.99);
+}
+
+/* Volumetric aurora float (compositor-only transform) */
+@keyframes auroraDriftA {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(28px, -22px, 0) scale(1.08);
+  }
+}
+
+@keyframes auroraDriftB {
+  0%, 100% {
+    transform: translate3d(0px, 0px, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(-24px, 20px, 0) scale(1.06);
+  }
+}
+
+.animate-aurora-a {
+  animation: auroraDriftA 14s ease-in-out infinite;
+}
+
+.animate-aurora-b {
+  animation: auroraDriftB 18s ease-in-out infinite;
+}
+
+/* Metric bar shimmer sweep (compositor-only transform) */
+@keyframes barShimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(220%);
+  }
+}
+
+.animate-bar-shimmer {
+  animation: barShimmer 2.8s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+/* Subtle orbit animation for ecosystem satellite nodes */
+@keyframes orbitGentle {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.ecosystem-orbit-ring {
+  transform-origin: center;
+  animation: orbitGentle 34s linear infinite;
+}
+
+/* Ripple animation for form submit button */
+@keyframes rippleExpand {
+  0% {
+    transform: scale(0);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
+.animate-ripple {
+  animation: rippleExpand 550ms var(--ease-settle) forwards;
+}
+
+/* Accessible focus ring */
+:focus-visible {
+  outline: 2px solid #96E9C6;
+  outline-offset: 2px;
+}
+
+/* Reduced motion compliance */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 120ms !important;
+  }
+
+  .btn-cta-glow,
+  .ecosystem-orbit-ring,
+  .animate-aurora-a,
+  .animate-aurora-b,
+  .animate-bar-shimmer {
+    animation: none;
+  }
+}

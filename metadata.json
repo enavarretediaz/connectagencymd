@@ -1,0 +1,6 @@
+{
+  "name": "Connect Agencia de Marketing Digital",
+  "description": "Impulsa tu negocio local con web rápida, SEO local y confianza digital para PYMES en España. Solicita tu diagnóstico gratuito y deja de perder clientes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
